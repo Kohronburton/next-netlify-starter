@@ -1,89 +1,61 @@
-# Next + Netlify Starter
+# ServiceFlow Catering Operations Demo
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
+A polished, interactive demo showing how to turn a Claude-powered catering workflow into a reliable operations product.
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+## What the demo proves
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. It also includes the [Essential Next.js Build Plugin](https://github.com/netlify/netlify-plugin-nextjs), which will allow for you to implement features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing.
+- Google Sheets can remain the source of truth.
+- Guest counts and recipe scaling are handled deterministically in application code.
+- Claude is used only for language-heavy instructions, not for repeatable calculations.
+- Outputs can be validated, regenerated from fresh context, and exported without relying on long chat history.
+- Nontechnical catering staff get a clean interface instead of a prompt window.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+## Demo features
 
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
+- Editable guest count and safety buffer
+- Menu item selection
+- Automatic ingredient scaling
+- Prep-list CSV export
+- Assembly instructions
+- Production timeline
+- Warning queue
+- System-health indicators
+- Responsive desktop and mobile layout
 
-## Table of Contents:
-
-- [Getting Started](#getting-started)
-- [Installation options](#installation-options)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-  - [Removing Cypress](#removing-cypress)
-
-## Getting Started
-
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Production architecture represented by the demo
 
-### Installation options
-
-**Option one:** One-click deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
-
-**Option two:** Manual clone
-
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
-3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
-
-## Testing
-
-### Included Default Testing
-
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
-
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
-- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
-- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
-
-If your team is not interested in this tooling, you can remove them with ease!
-
-### Removing Renovate
-
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
-
-### Removing Cypress
-
-For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
-
-```diff
-[[plugins]]
-  package = "netlify-plugin-cypress"
--  [plugins.inputs.postBuild]
--    enable = true
--
--  [plugins.inputs]
--    enable = false 
+```text
+Google Sheets / JSON / Markdown
+            ↓
+Normalized event and recipe data
+            ↓
+Deterministic calculation and validation layer
+            ↓
+Fresh, bounded Claude request
+            ↓
+Schema-validated prep and assembly package
+            ↓
+Google Docs / Sheets export and staff-facing UI
 ```
 
-If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
+## Next production steps
 
-```bash
-npm uninstall -D netlify-plugin-cypress
-```
+1. Add Google OAuth and Sheets API synchronization.
+2. Add a Python calculation service for recipe conversion and capacity checks.
+3. Add Anthropic API calls with strict JSON-schema validation.
+4. Store event runs, approvals, and output versions.
+5. Add role-based access for planners, kitchen leads, and pack-out staff.
+6. Add automated tests for scaling, allergens, temperatures, and missing source data.
 
-And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
+## Deployment
 
-```bash
-npm 
+The repository is configured for Next.js and Netlify. Connect the repository to Netlify and deploy the feature branch for a client-facing preview.
